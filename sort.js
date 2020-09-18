@@ -47,4 +47,30 @@ function insertionSort(arr) {
     }
     return arr;
   }
+
+
+// QUICK SORT //
+
+// Basic implementation
+function quickSort(array) {
+  function basicQuickSort(array) {
+    if (array.length < 2) {
+      return array;
+    }
+
+    let pivot = array[0];
+    const lessThanPivot = [];
+    const greaterThanPivot = [];
+
+    for (let i = 1; i < array.length; i++) {
+      if (array[i] > pivot) {
+        greaterThanPivot.push(array[i]);
+      } else {
+        lessThanPivot.push(array[i]);
+      }
+    }
+    return quickSort(lessThanPivot).concat(pivot, quickSort(greaterThanPivot));
+  }
+  return basicQuickSort(array);
+}
   
