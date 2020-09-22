@@ -73,4 +73,45 @@ function quickSort(array) {
   }
   return basicQuickSort(array);
 }
+
+// Hoare implementation
+function quickSort(array) {
+  function swap(i, j, arr) {
+    console.log("swap: ", array[i], "and ", array[j]);
+    let temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+  }
+
+  function partition(array, left, right, pivot) {
+    while (left <= right) {
+      while (array[left] < array[pivot]) {
+        left++;
+      }
+      while (array[right] > array[pivot]) {
+        right--;
+      }
+      if (left <= right) {
+        swap(left, right, array);
+        left++;
+        right--;
+      }
+    }
+    return left;
+  }
+    
+  function quickSortHoare(array, left, right) {
+    if (left >= right) {
+      return;
+    }
+    const pivot = Math.floor((left + right) / 2);
+    const index = partition(array, left, right, pivot);
+    quickSortHoare(array, left, index - 1);
+    quickSortHoare(array, index, right);
+    return array;
+  }
+
+  quickSortHoare(array, 0, array.length - 1);
+}
+
   
